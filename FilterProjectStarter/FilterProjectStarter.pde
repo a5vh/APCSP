@@ -16,7 +16,7 @@
 boolean PicLoaded = false;
 boolean Grayscale = false;
 boolean Inverse = false;
-boolean Effect2 = false;
+boolean FlipRG = false;
 boolean Effect3 = false;
 int picWidth = 0;
 int picHeight = 0;
@@ -86,13 +86,13 @@ void draw()
   fill(55);
   text("Inverse", 680, 275);
 
-  if (Effect2)
+  if (FlipRG)
     fill (#FFFF7D);     //Effect on means a yellow lighted button 
   else
     fill(255); 
   rect(660, 300, 130, 40, 10);
   fill(55);
-  text("Effect Two", 680, 325);
+  text("Flip R & G", 680, 325);
 
   if (Effect3)
     fill (#FFFF7D);    //Effect on means a yellow lighted button
@@ -163,7 +163,7 @@ void draw()
       }
     }
 
-    if (Effect2)
+    if (FlipRG)
     {
       // complete this section
       int i = picStart;
@@ -183,18 +183,16 @@ void draw()
     
     if (Effect3)
     {
-     int i = picStart;
-     while (i < picEnd)
-     {
-       color c = pixels[i];
-       
-       if (brightness(img.pixels[c]) > .5)
-       {
-          img.pixels[c] = color(255); 
-       } else {
-          img.pixels[c] = color(0);
-       }
-     }
+      int i = picStart;
+      while (i < picEnd)
+      {
+        color c = pixels[i];
+        color noise = color(random(255), random(255), random(255));
+        
+        float amt = random(1);
+        
+        pixels[i] = lerpColor(c, noise, amt);
+      }
     }
     
     updatePixels(); 
@@ -237,7 +235,7 @@ void mousePressed()
 
   if (mouseX>660 && mouseX<790 && mouseY>300 && mouseY<340 && PicLoaded)
   {
-    Effect2 = !Effect2;
+    FlipRG = !FlipRG;
   }  
 
   if (mouseX>660 && mouseX<790 && mouseY>350 && mouseY<390 && PicLoaded)
@@ -261,7 +259,7 @@ void infileSelected(File selection)
     PicLoaded = true;
     Grayscale = false;
     Inverse = false;
-    Effect2 = false;
+    FlipRG = false;
     Effect3 = false;
     redraw();
   }
