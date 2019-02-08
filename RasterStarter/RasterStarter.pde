@@ -18,7 +18,7 @@ float r, g, b;                      //red, green, blue floating point
 void setup()
 {
   img = loadImage(pathToImage);              //load the image
-  size(img.width, img.height);    //set the window size to match the image
+  surface.setSize(img.width, img.height);   //set the window size to match the image
 }
 
 void draw()
@@ -60,7 +60,7 @@ void draw()
       }
     }
     
-    color newColor = color(r/2, g/2, b/2);   //create a new color
+    color newColor = color(r, g, b);   //create a new color
     pixels[location] = newColor;       //store the new color  
     location = location + 1;           //next pixel!
   }
