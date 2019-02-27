@@ -1,10 +1,17 @@
 import pygame
 
-def __init__( self ):
-    self.bar = 1
+class Game(pygame.sprite.Sprite):
+    def __init__(self):
+        self.bar = 1
 
 
-def main():
+    def main(self):
+        print("hello wow")
+
+    def start(self):
+        print("dogs")
+
+while True:
     pygame.init()
     screen = pygame.display.set_mode((600, 600))
     pygame.display.set_caption("Snake Game")
@@ -12,6 +19,9 @@ def main():
     background = pygame.Surface(screen.get_size())
     background = background.convert()
     background.fill((250, 250, 250))
+
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
 
     startFont = pygame.font.Font(None, 36)
     startText = startFont.render("Start", 1, (10, 10, 10))
@@ -39,22 +49,11 @@ def main():
 
     button = startText.get_rect()
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN
-
-    while 1:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
-        screen.blit(background, (0, 0))
-        pygame.display.flip()
-
-def start():
-    print("hello there")
-
-
-if __name__ == '__main__': main()
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            pos = pygame.mouse.get_pos()
+            if button.collidepoint(pos):
+                start()
 
 
 
